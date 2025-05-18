@@ -1,0 +1,65 @@
+﻿@model MVC_Calculator1.Models.CalculatorModel
+
+@{
+    ViewBag.Title = "Калькулятор";
+}
+
+<h2>Калькулятор</h2>
+
+@Html.ValidationSummary(true, "", new { @class = "validation-summary" })
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Operand1)
+        @Html.TextBoxFor(m => m.Operand1, new { @class = "textBoxStyle" })
+        @Html.ValidationMessageFor(m => m.Operand1)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Operand2)
+        @Html.TextBoxFor(m => m.Operand2, new { @class = "textBoxStyle" })
+        @Html.ValidationMessageFor(m => m.Operand2)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Operation)
+        @Html.ListBoxFor(m => m.Operation, new SelectList(new[] {
+            new { Value = "Add", Text = "Сложение" },
+            new { Value = "Subtract", Text = "Вычитание" },
+            new { Value = "Multiply", Text = "Умножение" },
+            new { Value = "Divide", Text = "Деление" }
+        }, "Value", "Text"), new { @class = "form-control" })
+    </div>
+
+    <button type="submit" name="submitButton" value="calculate" class="btn btn-danger">Вычислить</button>
+    <button type="submit" name="submitButton" value="clear" class="btn btn-secondary">Очистить</button>
+}
+
+@if (ViewBag.CheckValue != null)
+{
+    if (Model.Result == (float)ViewBag.CheckValue)
+    {
+        <p class="alert alert-success" style="margin-top:20px;">Результат совпадает с контрольным значением!</p>
+    }
+    else
+    {
+        <p class="alert alert-warning" style="margin-top:20px;">Результат НЕ совпадает с контрольным значением.</p>
+    }
+}
+
+<div style="margin-top:20px;">
+    <strong>Результат:</strong> @Model.Result
+</div>
+@if (Model != null)
+{
+    @Html.ActionLink("Посмотреть результат на отдельной странице",
+        "Result",
+        new
+            {
+                operand1 = Model.Operand1.ToString(),
+            operand2 = Model.Operand2.ToString(),
+            operation = Model.Operation,
+            result = Model.Result.ToString()
+        })
+}

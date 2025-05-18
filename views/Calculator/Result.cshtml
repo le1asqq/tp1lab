@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Результат операции";
+}
+
+<h2>Результат операции</h2>
+
+<p>
+    @ViewBag.Operand1 @ViewBag.OperationWord @ViewBag.Operand2 = @ViewBag.Result
+</p>
+
+<p>
+    @Html.ActionLink("Вернуться к калькулятору", "Index")
+</p>

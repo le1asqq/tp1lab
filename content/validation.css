@@ -1,0 +1,14 @@
+﻿.validation-summary {
+    border: 1px solid red;
+    background-color: #ffe6e6;
+    color: red;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.textBoxStyle {
+    border: 2px solid blue;
+    padding: 5px;
+    border-radius: 3px;
+}
